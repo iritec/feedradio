@@ -1,7 +1,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Platform: macOS](https://img.shields.io/badge/Platform-macOS-lightgrey)
 
-# sagyo_rajio（作業用ラジオ）
+# 作業用ラジオ
+
+<img width="1432" height="844" alt="image" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
 
 sagyo_rajio は、登録した RSS フィードの新着ニュースから DJ 原稿を自動生成して読み上げる、macOS 向けのローカル動作ラジオアプリです。原稿生成はローカル LLM（Ollama / gemma4）、音声合成はローカルの VOICEVOX もしくは ElevenLabs で行うため、番組生成は基本的に手元の Mac で完結します。
 
