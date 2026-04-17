@@ -35,6 +35,9 @@ npm run dev
 
 初回起動後は、設定画面から TTS プロバイダとボイスを選び、フィード管理画面で RSS を登録してください。プリセットのおすすめフィードからワンタップで追加できます。
 
+### ダウンロード
+macOS 向けの配布版: [GitHub Releases](https://github.com/iritec/sagyo_rajio/releases)
+
 ### ライセンス
 
 本体コードは [MIT License](LICENSE) の下で公開しています。同梱しているオープニングジングル（`renderer/public/opening-jingle.mp3`）は作者が [Suno](https://suno.com/) で作成したオリジナル音源で、同じく MIT 条件下で利用できます。
