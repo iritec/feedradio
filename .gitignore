@@ -1,0 +1,16 @@
+node_modules
+dist
+out
+.next
+renderer/out
+renderer/.next
+release
+build/icon-source.png
+build/icon.iconset
+*.log
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+.playwright-cli/
+.playwright-mcp/

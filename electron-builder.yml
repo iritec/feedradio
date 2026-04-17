@@ -1,0 +1,33 @@
+appId: com.iritec.sagyo-radio
+productName: sagyo_rajio
+
+directories:
+  buildResources: build
+  output: release
+
+asarUnpack:
+  - renderer/out/**
+
+files:
+  - dist/electron/**/*
+  - renderer/out/**/*
+  - package.json
+  - "!**/*.map"
+  - "!**/*.ts"
+  - "!**/tsconfig*.json"
+
+mac:
+  icon: build/icon.icns
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+    - target: zip
+      arch: [arm64, x64]
+  category: public.app-category.entertainment
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.inherit.plist
+  artifactName: "${productName}-${version}-${arch}.${ext}"
+
+afterSign: scripts/notarize.js

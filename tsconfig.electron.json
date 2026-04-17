@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["es2020", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "outDir": "dist/electron",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/types/*": ["src/types/*"]
+    },
+    "sourceMap": true
+  },
+  "include": ["electron/**/*", "src/types/**/*", "src/core/**/*"],
+  "exclude": ["node_modules", "dist", "out", ".next", "renderer"]
+}

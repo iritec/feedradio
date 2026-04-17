@@ -1,0 +1,48 @@
+{
+  "name": "sagyo-radio",
+  "version": "0.1.0",
+  "description": "作業用ラジオ - ローカル LLM (Ollama) と TTS (VOICEVOX / ElevenLabs) で RSS から自動でラジオ番組を生成する macOS Electron アプリ",
+  "main": "dist/electron/electron/main.js",
+  "license": "MIT",
+  "author": "Shingo Irie",
+  "homepage": "https://github.com/iritec/sagyo_rajio#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iritec/sagyo_rajio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iritec/sagyo_rajio/issues"
+  },
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "dev:next": "next dev renderer --port 3000",
+    "dev:electron": "wait-on http://localhost:3000 && npm run build:electron && electron .",
+    "build:next": "next build renderer",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:next && npm run build:electron",
+    "start": "electron .",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "verify:mac:prod-env": "node scripts/verify-mac-production-env.js",
+    "dist:mac:prod": "npm run verify:mac:prod-env && npm run build && electron-builder --mac --publish never",
+    "dist:mac:prod:arm64": "npm run verify:mac:prod-env && npm run build && electron-builder --mac --arm64 --publish never",
+    "dist:mac:prod:x64": "npm run verify:mac:prod-env && npm run build && electron-builder --mac --x64 --publish never"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^3.1.1",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "concurrently": "^8.2.2",
+    "electron": "^30.0.9",
+    "electron-builder": "^26.8.1",
+    "typescript": "^5.5.3",
+    "wait-on": "^7.2.0"
+  }
+}
