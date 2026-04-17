@@ -2,7 +2,6 @@ import { app, BrowserWindow, ipcMain, protocol, net, shell } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import { pathToFileURL } from 'url';
-import { createTray } from './tray';
 import {
   IPC_CHANNELS,
   RadioStatus,
@@ -133,6 +132,15 @@ protocol.registerSchemesAsPrivileged([
       bypassCSP: true,
     },
   },
+  {
+    scheme: 'app',
+    privileges: {
+      secure: true,
+      standard: true,
+      supportFetchAPI: true,
+      corsEnabled: false,
+    },
+  },
 ]);
 
 function buildAudioUrl(filePath: string): string {
@@ -172,11 +180,73 @@ function registerAudioProtocol(): void {
   });
 }
 
+function rendererRootDir(): string {
+  return path.resolve(__dirname, '../../../renderer/out');
+}
+
+const APP_CONTENT_TYPES: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.mjs': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf',
+  '.otf': 'font/otf',
+  '.map': 'application/json; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
+};
+
+function registerAppProtocol(): void {
+  const root = rendererRootDir();
+  protocol.handle('app', async (req) => {
+    try {
+      const parsed = new URL(req.url);
+      let rel = decodeURIComponent(parsed.pathname || '/');
+      if (rel === '' || rel === '/') rel = '/index.html';
+      const candidate = path.resolve(root, '.' + rel);
+      if (candidate !== root && !candidate.startsWith(root + path.sep)) {
+        return new Response('Forbidden', { status: 403 });
+      }
+      let target = candidate;
+      if (fs.existsSync(target) && fs.statSync(target).isDirectory()) {
+        target = path.join(target, 'index.html');
+      }
+      if (!fs.existsSync(target)) {
+        const htmlFallback = candidate.replace(/\/$/, '') + '.html';
+        if (fs.existsSync(htmlFallback)) {
+          target = htmlFallback;
+        } else {
+          return new Response('Not found', { status: 404 });
+        }
+      }
+      const data = fs.readFileSync(target);
+      const ext = path.extname(target).toLowerCase();
+      const type = APP_CONTENT_TYPES[ext] ?? 'application/octet-stream';
+      return new Response(data, { headers: { 'Content-Type': type } });
+    } catch (err) {
+      console.error('[app-protocol] failed:', err);
+      return new Response('Internal error', { status: 500 });
+    }
+  });
+}
+
 function createWindow(): BrowserWindow {
   const win = new BrowserWindow({
     width: 420,
     height: 640,
-    frame: false,
+    titleBarStyle: 'hiddenInset',
+    trafficLightPosition: { x: 12, y: 14 },
     transparent: false,
     resizable: true,
     show: false,
@@ -191,7 +261,7 @@ function createWindow(): BrowserWindow {
   if (isDev) {
     win.loadURL('http://localhost:3000');
   } else {
-    win.loadFile(path.join(__dirname, '../../../renderer/out/index.html'));
+    win.loadURL('app://bundle/index.html');
   }
 
   win.once('ready-to-show', () => {
@@ -217,19 +287,6 @@ function showOrCreateWindow(): void {
     return;
   }
   mainWindow = createWindow();
-}
-
-function toggleWindow(): void {
-  if (mainWindow && !mainWindow.isDestroyed()) {
-    if (mainWindow.isVisible()) {
-      mainWindow.hide();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
-    }
-    return;
-  }
-  showOrCreateWindow();
 }
 
 function buildSegmentChangeEvent(): SegmentChangeEvent {
@@ -659,10 +716,6 @@ function registerIpcHandlers(): void {
 void programAudioDir;
 
 app.whenReady().then(() => {
-  if (process.platform === 'darwin' && app.dock) {
-    app.dock.hide();
-  }
-
   try {
     const removed = cleanupExpiredItems();
     if (removed > 0) {
@@ -673,13 +726,9 @@ app.whenReady().then(() => {
   }
 
   registerAudioProtocol();
+  registerAppProtocol();
   registerIpcHandlers();
   mainWindow = createWindow();
-
-  createTray({
-    onToggleWindow: toggleWindow,
-    onShowWindow: showOrCreateWindow,
-  });
 
   refreshAutoFetch();
 
@@ -697,5 +746,5 @@ app.on('before-quit', () => {
 });
 
 app.on('window-all-closed', () => {
-  // トレイから再表示できるように、ウィンドウを閉じてもアプリは終了しない
+  app.quit();
 });

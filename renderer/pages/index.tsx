@@ -548,7 +548,6 @@ export default function Home() {
               <span>過去のラジオ</span>
             </button>
           ) : null}
-          <span className="app__title">作業用ラジオ</span>
         </header>
 
         <section className="player">
