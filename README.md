@@ -7,6 +7,9 @@
 
 sagyo_rajio は、登録した RSS フィードの新着ニュースから DJ 原稿を自動生成して読み上げる、macOS 向けのローカル動作ラジオアプリです。原稿生成はローカル LLM（Ollama / gemma4）、音声合成はローカルの VOICEVOX もしくは ElevenLabs で行うため、番組生成は基本的に手元の Mac で完結します。
 
+利用イメージはこちら
+https://youtube.com/watch?v=3poyPWz1Bd4
+
 ### 特徴
 
 - RSS フィードから新着記事を自動収集し、時間帯に合わせた番組を生成
