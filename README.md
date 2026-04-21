@@ -1,8 +1,9 @@
 <div align="center">
-  <img src="build/icon-source.png" alt="sagyo_rajio app icon" width="160" />
-  <h1>sagyo_rajio</h1>
+  <img src="build/icon-source.png" alt="FeedRadio app icon" width="160" />
+  <h1>FeedRadio</h1>
   <p><strong>Your personal working radio, generated locally on macOS.</strong></p>
   <p>RSS feeds become a DJ-style program — scripted by a local LLM and voiced on your Mac.</p>
+  <p><em>Also known as 作業用ラジオ (sagyo_rajio).</em></p>
   <p>
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
     <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" alt="macOS" />
@@ -13,10 +14,10 @@
 
 ## Overview
 
-sagyo_rajio is a local-first "working radio" app for macOS.
+FeedRadio is a local-first "working radio" app for macOS.
 It pulls fresh items from your RSS feeds, writes a DJ script with a local LLM (Ollama), and synthesizes the audio with VOICEVOX or ElevenLabs — so your background radio keeps flowing while you focus on work.
 
-<img width="1432" alt="sagyo_rajio screenshot" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
+<img width="1432" alt="FeedRadio screenshot" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
 
 Demo: https://youtube.com/watch?v=3poyPWz1Bd4
 
