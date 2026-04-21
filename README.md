@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="build/icon-source.png" alt="FeedRadio app icon" width="160" />
+  <img src="docs/logo.png" alt="FeedRadio app icon" width="160" />
   <h1>FeedRadio</h1>
   <p><strong>Your personal working radio, generated locally on macOS.</strong></p>
   <p>RSS feeds become a DJ-style program — scripted by a local LLM and voiced on your Mac.</p>
