@@ -1,65 +1,36 @@
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Platform: macOS](https://img.shields.io/badge/Platform-macOS-lightgrey)
+<div align="center">
+  <img src="build/icon-source.png" alt="sagyo_rajio app icon" width="160" />
+  <h1>sagyo_rajio</h1>
+  <p><strong>Your personal working radio, generated locally on macOS.</strong></p>
+  <p>RSS feeds become a DJ-style program — scripted by a local LLM and voiced on your Mac.</p>
+  <p>
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
+    <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" alt="macOS" />
+    <img src="https://img.shields.io/badge/Node-%3E%3D20-brightgreen" alt="Node 20+" />
+    <img src="https://img.shields.io/badge/Ollama-local%20only-111827" alt="Local Ollama" />
+  </p>
+</div>
 
-# 作業用ラジオ
+## Overview
 
-<img width="1432" height="844" alt="image" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
+sagyo_rajio is a local-first "working radio" app for macOS.
+It pulls fresh items from your RSS feeds, writes a DJ script with a local LLM (Ollama), and synthesizes the audio with VOICEVOX or ElevenLabs — so your background radio keeps flowing while you focus on work.
 
-sagyo_rajio は、登録した RSS フィードの新着ニュースから DJ 原稿を自動生成して読み上げる、macOS 向けのローカル動作ラジオアプリです。原稿生成はローカル LLM（Ollama / gemma4）、音声合成はローカルの VOICEVOX もしくは ElevenLabs で行うため、番組生成は基本的に手元の Mac で完結します。
+<img width="1432" alt="sagyo_rajio screenshot" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
 
-利用イメージはこちら
-https://youtube.com/watch?v=3poyPWz1Bd4
+Demo: https://youtube.com/watch?v=3poyPWz1Bd4
 
-### 特徴
-
-- RSS フィードから新着記事を自動収集し、時間帯に合わせた番組を生成
-- 音声合成は VOICEVOX（無料・ローカル）または ElevenLabs（クラウド）から選択
-- 自動取得間隔（10 分〜2 時間）でバックグラウンドで番組を更新
-- 設定・履歴・音声は Mac 内に保存されるローカル完結型
-
-### 必要なもの
-
-- macOS
-- Node.js `20.19+` または `22.12+`
-- [Ollama](https://ollama.com/) と DJ 原稿生成に使うローカルモデル
-  例: `ollama pull gemma4:26b`
-- 音声合成に下記のいずれか
-  - [VOICEVOX](https://voicevox.hiroshiba.jp/)（無料・ローカル。`http://127.0.0.1:50021` で起動）
-  - [ElevenLabs](https://elevenlabs.io/) の API キー
-
-### 使い方
-
-```bash
-git clone https://github.com/iritec/sagyo_rajio.git
-cd sagyo_rajio
-npm install
-npm run dev
-```
-
-初回起動後は、設定画面から TTS プロバイダとボイスを選び、フィード管理画面で RSS を登録してください。プリセットのおすすめフィードからワンタップで追加できます。
-
-### ダウンロード
-macOS 向けの配布版: [GitHub Releases](https://github.com/iritec/sagyo_rajio/releases)
-
-### ライセンス
-
-本体コードは [MIT License](LICENSE) の下で公開しています。同梱しているオープニングジングル（`renderer/public/opening-jingle.mp3`）は作者が [Suno](https://suno.com/) で作成したオリジナル音源で、同じく MIT 条件下で利用できます。
-
----
-
-## English
-
-sagyo_rajio is a local-first "working radio" app for macOS that turns your RSS feeds into an auto-generated DJ program. Scripts are written by a local LLM (Ollama / gemma4) and synthesized by either a local VOICEVOX engine or ElevenLabs, so program generation stays on your Mac.
-
-### Features
+## Features
 
 - Aggregates new items from your RSS feeds and builds a time-of-day-aware program
-- Pick between VOICEVOX (free / local) and ElevenLabs (cloud) for TTS
+- Local DJ scripting via Ollama, plus a fresh piece of trivia on every opening
+- Pick between VOICEVOX (free, local) and ElevenLabs (cloud) for TTS
 - Background auto-refresh at a configurable interval (10 min – 2 h)
+- Self-made opening jingle that fades out behind the opening narration
 - Dedup for seen articles, history of past programs, and per-segment seek
-- Everything (settings, history, audio) stays in your local user directory
+- Settings, history, and audio stay in your local user directory
 
-### Requirements
+## Requirements
 
 - macOS
 - Node.js `20.19+` or `22.12+`
@@ -69,7 +40,7 @@ sagyo_rajio is a local-first "working radio" app for macOS that turns your RSS f
   - [VOICEVOX](https://voicevox.hiroshiba.jp/) (free, runs locally on `http://127.0.0.1:50021`)
   - An [ElevenLabs](https://elevenlabs.io/) API key
 
-### Quick Start
+## Quick start
 
 ```bash
 git clone https://github.com/iritec/sagyo_rajio.git
@@ -78,8 +49,16 @@ npm install
 npm run dev
 ```
 
-After the first launch, open the Settings screen to pick a TTS provider and voice, then head to Feeds to register RSS URLs. A curated preset list lets you add common feeds with a single tap.
+After the first launch, open **Settings** to pick a TTS provider and voice, then go to **Feeds** to register RSS URLs. A curated preset list (NHK, Yahoo, Hatena Bookmark, BBC, NPR, and more) lets you add common feeds with a single tap.
 
-### License
+## Download
+
+Prebuilt macOS binaries are available on [GitHub Releases](https://github.com/iritec/sagyo_rajio/releases).
+
+## Storage
+
+Settings and history live under Electron's `userData` directory (on macOS: `~/Library/Application Support/sagyo-radio/`). Generated audio files are written to the system temp directory.
+
+## License
 
 The application source is released under the [MIT License](LICENSE). The bundled opening jingle (`renderer/public/opening-jingle.mp3`) was created by the author with [Suno](https://suno.com/) and is distributed under the same MIT terms.
