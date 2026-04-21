@@ -3,7 +3,6 @@
   <h1>FeedRadio</h1>
   <p><strong>Your personal working radio, generated locally on macOS.</strong></p>
   <p>RSS feeds become a DJ-style program — scripted by a local LLM and voiced on your Mac.</p>
-  <p><em>Also known as 作業用ラジオ (sagyo_rajio).</em></p>
   <p>
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
     <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" alt="macOS" />
