@@ -44,8 +44,8 @@ Demo: https://youtube.com/watch?v=3poyPWz1Bd4
 ## Quick start
 
 ```bash
-git clone https://github.com/iritec/sagyo_rajio.git
-cd sagyo_rajio
+git clone https://github.com/iritec/feedradio.git
+cd feedradio
 npm install
 npm run dev
 ```
@@ -54,7 +54,7 @@ After the first launch, open **Settings** to pick a TTS provider and voice, then
 
 ## Download
 
-Prebuilt macOS binaries are available on [GitHub Releases](https://github.com/iritec/sagyo_rajio/releases).
+Prebuilt macOS binaries are available on [GitHub Releases](https://github.com/iritec/feedradio/releases).
 
 ## Storage
 
