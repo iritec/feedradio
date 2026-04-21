@@ -16,9 +16,9 @@
 FeedRadio is a local-first "working radio" app for macOS.
 It pulls fresh items from your RSS feeds, writes a DJ script with a local LLM (Ollama), and synthesizes the audio with VOICEVOX or ElevenLabs — so your background radio keeps flowing while you focus on work.
 
-<img width="1432" alt="FeedRadio screenshot" src="https://github.com/user-attachments/assets/7f96d4c8-d526-4fe8-971c-8f50b4dab58e" />
+<img width="2246" height="1442" alt="SCR-20260421-lueu" src="https://github.com/user-attachments/assets/9099bbee-aa8d-44f6-bac8-1dbcbcf92064" />
 
-Demo: https://youtube.com/watch?v=3poyPWz1Bd4
+Demo: https://youtu.be/hDzXaeAOiUY
 
 ## Features
 
